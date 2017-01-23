@@ -1,0 +1,20 @@
+*{}
+img {width: 100%}
+
+.container {
+    position: relative;
+}
+.textField {
+    position:absolute;
+    left: 355px;
+    top: 115px;
+}
+.textFieldInput {
+    background: transparent;
+    font-family: Inconsolata;
+    font-style: bold;
+    font-size: 12px;
+    color: #43ce18;
+    border: hidden;
+    
+}
