@@ -15,11 +15,17 @@
 
   // let's display the readme
   server.get('/', function(req, res) {
-    var readmePath    = __dirname + '/readme.md',
+    var readmePath    = __dirname + '/index.html',
         readmeContent = filesystem.readFileSync(readmePath, 'utf8');
 
     res.send(marked(readmeContent));
   });
+  // server.get('/', function(req, res) {
+  //   var indexPath    = __dirname + '/index.html',
+  //       indexContent = filesystem.readFileSync(indexPath, 'utf8');
+  //
+  //   res.send(marked(indexContent));
+  // });
 
   var folders  = require('./fixtures/folders.json'),
       files    = require('./fixtures/files.json'),

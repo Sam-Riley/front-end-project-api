@@ -31,11 +31,10 @@
    }
   </style>
 </head>
+
 <body>
     <div class="col-sm-12">
-
       <div class="textField form-group">
-          <!-- <input type="search" id="textFieldInput"  /> -->
           <div id="container" class=""></div>
       </div>
 
@@ -50,16 +49,20 @@
   <script type="text/babel">
   var destination = document.querySelector("#container");
 //Above I have created a variable that connects this script to my html id "container"
+
+//Below I have created a react component that handles the individual query's. These individual "todo items" will be held in
   var TodoItems = React.createClass({
+    //The render function is the hallmark of React. This allows me to format the entries in my todoList
     render: function() {
       var todoEntries = this.props.entries;
 
       function createTasks(item) {
         return <li key={item.key}>{item.text}</li>
       }
-
+      //Above I have created these todoItems to be list items in
       var listItems = todoEntries.map(createTasks);
-
+      //Above I am taking my todoEntries and mapping through each item, so that I can fill my array in TodoList component.
+      //Below, the return sticks my list items into a ul list.
       return (
         <ul className="theList">
           {listItems}
@@ -68,13 +71,15 @@
     }
   });
 
+//This is my todolist that takes in each entry. Think of this like a container for each query.
   var TodoList = React.createClass({
     getInitialState: function() {
       return {
         items: []
       };
     },
-
+  //Above I have set this function to get an initial items array state of nill/empty. Search results are not expected to persist between refreshing the page. This ensures a base state when using the app.
+  //Below is a function that will take in the empty array "items" with a new variable we can use to add new todos
     addItem: function(e) {
       var itemArray = this.state.items;
 
@@ -84,7 +89,7 @@
           key: Date.now()
         }
       );
-
+      //This portion of the function takes in the empty items array, and sets it to a new state containing our new items.
       this.setState({
         items: itemArray
       });
@@ -93,6 +98,7 @@
 
       e.preventDefault();
     },
+    //The render function below holds the input field, and below that it holds the previous querys which I have called todos.
     render: function() {
       return (
         <div className="todoListMain">
@@ -100,20 +106,23 @@
             <form onSubmit={this.addItem}>
               <input ref={(a) => this._inputElement = a}
                      placeholder="">
+                     //The "_inputElement" utilizes ES6 syntax, and saves the input to use later for our list.
               </input>
             </form>
           </div>
           <TodoItems entries={this.state.items}/>
+          //Below the input field we have the list of items we queried previously.
         </div>
       );
     }
   });
-
+//Below is the final render function from React. This takes my components tied together and renders them in the DOM for our front end experience. The todoItems are contained within the todoList which is then displayed here.
   ReactDOM.render(
     <div>
       <TodoList/>
     </div>,
     destination
+    //"destination" is our hook from the very top"
   );
 </script>
 </body>
