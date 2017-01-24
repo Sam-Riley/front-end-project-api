@@ -1,5 +1,5 @@
 //Global variable to capture input value
-var input = document.getElementById('textFieldInput')
+var input = document.getElementById('container')
 
 //Adding an even listener to input variable. This tells my code to fire off my function "pressEnter" after a keypress (which key to use is handled below).
 input.addEventListener('keypress', pressEnter)
@@ -7,10 +7,10 @@ input.addEventListener('keypress', pressEnter)
 //This function will take the value we saved with the input var, and run it against the API
 function pressEnter(event){
     var searchInput = input.value
-    var api = 'http://localhost:8080/api/'
+    var api = 'http://localhost:8080/api'
     //If the key entered was "Enter" then fetch the API route
     if (event.key === 'Enter') {
-        fetch(api + 'ls/:id', {
+        fetch(api + '/ln/:id=' + searchInput, {
             // body: JSON.stringify(searchInput),
             method: 'GET',
             url: api

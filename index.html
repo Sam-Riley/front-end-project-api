@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Pipboy</title>
+  <script src="https://fb.me/react-15.1.0.min.js"></script>
+  <script src="https://fb.me/react-dom-15.1.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Stylesheets go here. -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/global.css" />
+  <style>
+    .todoListMain .header input {
+      font-size: 10px;
+      color: #43ce18;
+      background-color: transparent;
+      font-family: Inconsolata;
+      border: hidden;
+    }
+    .todoListMain .theList {
+     list-style: none;
+     padding-left: 0;
+     width: 200px;
+   }
+   .todoListMain .theList li {
+     color: #43ce18;
+     background-color: transparent;
+     border-radius: 5px;
+   }
+  </style>
 </head>
 <body>
     <div class="col-sm-12">
 
       <div class="textField form-group">
-          <input type="search" id="textFieldInput"  />
+          <!-- <input type="search" id="textFieldInput"  /> -->
+          <div id="container" class=""></div>
       </div>
 
       <img id="app" src="../img/pipboy-notext.png" />
@@ -22,5 +45,76 @@
 
 
   <script type="text/javascript" src="global.js"></script>
+<!-- Above is the script that will make use of the provided API -->
+  <!-- Below I have added a React portion that handles the query's, and displays the results. I used a simple "todo" style approach.  -->
+  <script type="text/babel">
+  var destination = document.querySelector("#container");
+//Above I have created a variable that connects this script to my html id "container"
+  var TodoItems = React.createClass({
+    render: function() {
+      var todoEntries = this.props.entries;
+
+      function createTasks(item) {
+        return <li key={item.key}>{item.text}</li>
+      }
+
+      var listItems = todoEntries.map(createTasks);
+
+      return (
+        <ul className="theList">
+          {listItems}
+        </ul>
+      );
+    }
+  });
+
+  var TodoList = React.createClass({
+    getInitialState: function() {
+      return {
+        items: []
+      };
+    },
+
+    addItem: function(e) {
+      var itemArray = this.state.items;
+
+      itemArray.push(
+        {
+          text: this._inputElement.value,
+          key: Date.now()
+        }
+      );
+
+      this.setState({
+        items: itemArray
+      });
+
+      this._inputElement.value = "";
+
+      e.preventDefault();
+    },
+    render: function() {
+      return (
+        <div className="todoListMain">
+          <div className="header">
+            <form onSubmit={this.addItem}>
+              <input ref={(a) => this._inputElement = a}
+                     placeholder="">
+              </input>
+            </form>
+          </div>
+          <TodoItems entries={this.state.items}/>
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <div>
+      <TodoList/>
+    </div>,
+    destination
+  );
+</script>
 </body>
 </html>
