@@ -10,7 +10,7 @@ function pressEnter(event){
     var api = 'http://localhost:8080/api'
     //If the key entered was "Enter" then fetch the API route
     if (event.key === 'Enter') {
-        fetch(api + '/ls/4' + searchInput, {
+        fetch(api + '/cat/4', {
             // body: JSON.stringify(searchInput),
             method: 'GET',
             url: api

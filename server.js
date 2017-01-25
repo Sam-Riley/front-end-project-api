@@ -14,7 +14,7 @@
   server.use(cors());
 
   // let's display the readme
-  server.get('/', function(req, res) {
+  server.get('/readme', function(req, res) {
     var readmePath    = __dirname + '/readme.md',
         readmeContent = filesystem.readFileSync(readmePath, 'utf8');
 
@@ -179,6 +179,7 @@
     return item;
   }
 
+  server.use(express.static('public'))
   server.use('/api', router);
   server.listen(8080);
 

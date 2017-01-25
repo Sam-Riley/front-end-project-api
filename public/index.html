@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Pipboy</title>
-  <script src="https://fb.me/react-15.1.0.min.js"></script>
-  <script src="https://fb.me/react-dom-15.1.0.min.js"></script>
+  <script src="https://fb.me/react-15.1.0.js"></script>
+    <script src="https://fb.me/react-dom-15.1.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,7 +16,7 @@
       font-size: 10px;
       color: #43ce18;
       background-color: transparent;
-      font-family: Inconsolata;
+      font-family: monospace;;
       border: hidden;
     }
     .todoListMain .theList {
@@ -43,7 +43,7 @@
     </div>
 
 
-  <script type="text/javascript" src="global.js"></script>
+  <script type="text/javascript" src="js/global.js"></script>
 <!-- Above is the script that will make use of the provided API -->
   <!-- Below I have added a React portion that handles the query's, and displays the results. I used a simple "todo" style approach.  -->
   <script type="text/babel">
@@ -105,13 +105,11 @@
           <div className="header">
             <form onSubmit={this.addItem}>
               <input ref={(a) => this._inputElement = a}
-                     placeholder="">
-                     //The "_inputElement" utilizes ES6 syntax, and saves the input to use later for our list.
-              </input>
+                     placeholder="" />
+
             </form>
           </div>
           <TodoItems entries={this.state.items}/>
-          //Below the input field we have the list of items we queried previously.
         </div>
       );
     }
