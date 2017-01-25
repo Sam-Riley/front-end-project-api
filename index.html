@@ -52,7 +52,7 @@
 
 //Below I have created a react component that handles the individual query's. These individual "todo items" will be held in
   var TodoItems = React.createClass({
-    //The render function is the hallmark of React. This allows me to format the entries in my todoList
+    //The render function is the hallmark of React. This allows me to format the entries in my todoList as you will notice in each component.
     render: function() {
       var todoEntries = this.props.entries;
 
@@ -71,7 +71,7 @@
     }
   });
 
-//This is my todolist that takes in each entry. Think of this like a container for each query.
+//This is my todolist that takes in each entry. Think of this like a container for each command.
   var TodoList = React.createClass({
     getInitialState: function() {
       return {

@@ -15,7 +15,7 @@
 
   // let's display the readme
   server.get('/', function(req, res) {
-    var readmePath    = __dirname + '/index.html',
+    var readmePath    = __dirname + '/readme.md',
         readmeContent = filesystem.readFileSync(readmePath, 'utf8');
 
     res.send(marked(readmeContent));
